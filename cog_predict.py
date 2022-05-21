@@ -30,4 +30,5 @@ class Predictor(BasePredictor):
             text_features = self.model.encode_text(text_tokens)
         image_features /= image_features.norm(dim=-1, keepdim=True)
         text_features /= text_features.norm(dim=-1, keepdim=True)
-        return text_features.cpu().numpy() @ image_features.cpu().numpy().T
+        sim = text_features.cpu().numpy() @ image_features.cpu().numpy().T
+        return sim.item()
